@@ -11,10 +11,8 @@ This Python script automates the process of joining and managing copy-trading pr
 
 ## Requirements
 - Python 3.x
-- `requests` library
 - `simpleaudio` library
-- `json` library
-- Binance account and API keys
+- Binance account
 
 ## Installation
 1. Ensure Python 3.x is installed on your system.
@@ -28,7 +26,7 @@ This Python script automates the process of joining and managing copy-trading pr
 Before running the script, you need to configure the following:
 
 - **API Headers**: Set your Binance API headers (`csrftoken`, `bncuuid`, `fvideoid`, `fvideotoken`, `cookie`) in the script.
-- **Trader Profiles**: Define the trader profiles you want to follow in `PROFILES_SETTINGS`. Include their `leadPortfolioId` and your desired investment settings.
+- **Trader Profiles**: Add the required profiles to your Binance **Favorites list** and define the trader profiles you want to follow in `PROFILES_SETTINGS`. Include their `leadPortfolioId` and your desired investment settings.
 - **Sound File**: Place a `.wav` sound file in the same directory as the script or update the `sound_file` variable with the path to your sound file.
 
 ## Trader Profile Settings
@@ -55,6 +53,7 @@ To run the script, you need to set your Binance API headers. Here's how to obtai
 5. **Find the Relevant Request**: Look for a network request that corresponds to the copy-trading action. Click on it to view details.
 6. **Copy Headers**: In the request details, find the "Headers" section. Here, you will see various headers like `csrftoken`, `bncuuid`, `fvideoid`, `fvideotoken`, and `cookie`.
 7. **Update the Script**: Copy these header values and paste them into the corresponding variables in the script.
+You can also copy the request as cURL and paste it somewhere to be able to copy all the `cookie` string
 
 ### Important Notes:
 - The headers are tied to your session and may expire, requiring you to fetch new ones periodically.
@@ -63,7 +62,7 @@ To run the script, you need to set your Binance API headers. Here's how to obtai
 ## Usage
 Run the script using Python:
 ```bash
-python3 <script_name>.py
+python Binance_Join_CopyTrader_Automation.py
 ```
 The script will start and continuously monitor for available slots in your favorite traders' profiles. When a slot is available, it will attempt to join using your predefined settings.
 
