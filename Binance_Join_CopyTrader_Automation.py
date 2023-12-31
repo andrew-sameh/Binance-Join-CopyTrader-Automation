@@ -36,7 +36,7 @@ from typing import Optional
 # Portifolio ID can be found in the URL when you click on the trader's profile
 
 PROFILES_SETTINGS = {
-    "3745161142246130945": {
+    "3704029333160438785": {
         "leadPortfolioId": "3704029333160438785",
         "investAmount": 100, 
         "copyModel": "FIXED_RATIO", # can be removed since it's the default value
