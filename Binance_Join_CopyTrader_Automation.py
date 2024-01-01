@@ -5,7 +5,8 @@ import simpleaudio as sa
 from typing import Optional
 
 
-# Script Default value, can be removed if the value is not changed
+# Script Default value 
+# You can be ignore these in the profiles settings if the values are the same
 # "copyModel": "FIXED_RATIO", 
 # "investAsset": "USDT", 
 # "costPerOrder": 0, 
@@ -36,8 +37,8 @@ from typing import Optional
 # Portifolio ID can be found in the URL when you click on the trader's profile
 
 PROFILES_SETTINGS = {
-    "3745161142246130945": {
-        "leadPortfolioId": "3704029333160438785",
+    "3708884547500009217": {
+        "leadPortfolioId": "3708884547500009217",
         "investAmount": 100, 
         "copyModel": "FIXED_RATIO", # can be removed since it's the default value
         "investAsset": "USDT",  # can be removed since it's the default value
@@ -50,6 +51,10 @@ PROFILES_SETTINGS = {
         "stopLostRate": None,  # can be removed since it's the default value
         "maxPositionPerSymbolRate": None, # can be removed since it's the default value
     },
+    "3746309621504731393": {
+        "leadPortfolioId": "3746309621504731393",
+        "investAmount": 100, 
+    },
 }
 
 # Open Inspect > network tab and copy the following headers after hitting the Favorite copy traders list page
@@ -57,7 +62,7 @@ csrftoken = ""
 bncuuid = ""
 fvideoid = ""
 fvideotoken = ""
-cookie = ""
+cookie = ''
 
 
 completed_list = []
@@ -109,11 +114,11 @@ def join_lead(
         "costPerOrder": costPerOrder,
         "investAsset": investAsset,
         "leadPortfolioId": leadPortfolioId,
-        "totalStopLossRate": totalStopLossRate, # Remove it if it's not needed
-        "leverageValue": leverageValue, # Remove it if it's not needed
-        "takeProfitRate": takeProfitRate, # Remove it if it's not needed
-        "stopLostRate": stopLostRate, # Remove it if it's not needed
-        "maxPositionPerSymbolRate": maxPositionPerSymbolRate, # Remove it if it's not needed
+        "totalStopLossRate": totalStopLossRate, 
+        "leverageValue": leverageValue, 
+        "takeProfitRate": takeProfitRate, 
+        "stopLostRate": stopLostRate, 
+        "maxPositionPerSymbolRate": maxPositionPerSymbolRate,
     }
     try:
         response = requests.post(url, headers=headers, data=json.dumps(join_params))
@@ -122,9 +127,9 @@ def join_lead(
             print(
                 f"Joined {leadPortfolioId} successfully!, amount: {investAmount} {investAsset}"
             )
-            print(r.message)
+            # print(r)
             completed_list.append(leadPortfolioId)
-            return response.json()
+            return r
         else:
             print(f"Error joining {leadPortfolioId}!")
             print(response.json()["message"])
@@ -168,10 +173,11 @@ def check_portfolio(data):
             if profile["leadPortfolioId"] in PROFILES_SETTINGS and profile["leadPortfolioId"] not in completed_list:
                 if profile["currentCopyCount"] < profile["maxCopyCount"]:
                     print(
-                        f"Alarm! {profile['nickname']} has available slots! {profile['currentCopyCount']} / {profile['maxCopyCount']} -- Go to https://www.binance.com/en/copy-trading/copy-setting?portfolioId={profile['leadPortfolioId']}"
+                        f"Alarm! {profile['nickname']} has available slots! {profile['currentCopyCount']} / {profile['maxCopyCount']} -- Profile Link: https://www.binance.com/en/copy-trading/copy-setting?portfolioId={profile['leadPortfolioId']}"
                     )
                     play_sound(sound_file)
-                    join_lead(leadPortfolioId=profile["leadPortfolioId"], **PROFILES_SETTINGS[profile["leadPortfolioId"]])
+                    # Comment the below line if you want to join the profile manually.
+                    join_lead(**PROFILES_SETTINGS[profile["leadPortfolioId"]])
 
 
 def main():
@@ -179,13 +185,13 @@ def main():
     print("Script started!")
     while True:
         elapsed_time = time.time() - start_time
-        print(f"Elapsed Time: {int(elapsed_time)} seconds", end="\r")  # Print the elapsed time without a newline
+        print(f"Elapsed Time: {int(elapsed_time)} seconds", end="\r")
         data = fetch_data()
         check_portfolio(data)
         if len(completed_list) == len(PROFILES_SETTINGS):
             print("All profiles are joined successfully!")
             break
-        time.sleep(2)  # Wait for 2 seconds before next request
+        time.sleep(2)  # Wait for 2 seconds before next request, can be removed, but I didnt test if there is a rate limit.
 
 
 if __name__ == "__main__":
