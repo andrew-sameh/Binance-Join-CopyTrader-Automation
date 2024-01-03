@@ -5,6 +5,7 @@ This Python script automates the process of joining and managing copy-trading pr
 
 ## Tip
 If you find the script to be useful and you managed to join your favourite traders. A tip would be highly appreciated.
+
 **My Binance ID: 307397287**
 
 ## Features
