@@ -3,6 +3,10 @@
 ## Overview
 This Python script automates the process of joining and managing copy-trading profiles on Binance. It is designed for users who wish to follow multiple traders and automatically join their trading strategies when slots become available. The script includes features such as custom investment settings per trader, sound notifications, and automatic joining based on predefined criteria.
 
+## Tip
+If you find the script to be useful and you managed to join your favourite traders. A tip would be highly appreciated.
+**My Binance ID: 307397287**
+
 ## Features
 - **Automated Joining**: Automatically joins trading profiles based on predefined settings.
 - **Sound Notifications**: Alerts the user with a sound notification when a slot is available.
